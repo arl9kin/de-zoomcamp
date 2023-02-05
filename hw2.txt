@@ -1,0 +1,86 @@
+1. Created task run 'fetch-b4598a4a-0' for task 'fetch'
+12:31:40 PM
+Executing 'fetch-b4598a4a-0' immediately...
+12:31:40 PM
+Finished in state Completed()
+12:31:44 PM
+fetch-b4598a4a-0
+Created task run 'clean-b9fd7e03-0' for task 'clean'
+12:31:44 PM
+Executing 'clean-b9fd7e03-0' immediately...
+12:31:44 PM
+   VendorID lpep_pickup_datetime lpep_dropoff_datetime store_and_fwd_flag  ...  total_amount  payment_type  trip_type  congestion_surcharge
+0       2.0  2019-12-18 15:52:30   2019-12-18 15:54:39                  N  ...          4.81           1.0        1.0                   0.0
+1       2.0  2020-01-01 00:45:58   2020-01-01 00:56:39                  N  ...         24.36           1.0        2.0                   0.0
+
+[2 rows x 20 columns]
+12:31:44 PM
+clean-b9fd7e03-0
+columns: VendorID                        float64
+lpep_pickup_datetime     datetime64[ns]
+lpep_dropoff_datetime    datetime64[ns]
+store_and_fwd_flag               object
+RatecodeID                      float64
+PULocationID                      int64
+DOLocationID                      int64
+passenger_count                 float64
+trip_distance                   float64
+fare_amount                     float64
+extra                           float64
+mta_tax                         float64
+tip_amount                      float64
+tolls_amount                    float64
+ehail_fee                       float64
+improvement_surcharge           float64
+total_amount                    float64
+payment_type                    float64
+trip_type                       float64
+congestion_surcharge            float64
+dtype: object
+12:31:44 PM
+clean-b9fd7e03-0
+rows: 447770
+12:31:45 PM
+clean-b9fd7e03-0
+Finished in state Completed()
+12:31:45 PM
+clean-b9fd7e03-0
+Created task run 'write_local-f322d1be-0' for task 'write_local'
+12:31:45 PM
+Executing 'write_local-f322d1be-0' immediately...
+12:31:45 PM
+Finished in state Completed()
+12:31:46 PM
+write_local-f322d1be-0
+Created task run 'write_gcs-1145c921-0' for task 'write_gcs'
+12:31:46 PM
+Executing 'write_gcs-1145c921-0' immediately...
+12:31:46 PM
+Getting bucket 'dtc_data_lake_citric-optics-374013'.
+12:31:46 PM
+write_gcs-1145c921-0
+Uploading from PosixPath('data/green/green_tripdata_2020-01.parquet') to the bucket 'dtc_data_lake_citric-optics-374013' path 'data/green/green_tripdata_2020-01.parquet'.
+12:31:47 PM
+write_gcs-1145c921-0
+Finished in state Completed()
+12:31:47 PM
+write_gcs-1145c921-0
+Finished in state Completed('All states completed.')
+
+2. Correct: 0 5 1 * * - At 05:00 AM on day 1 of the month.
+   0 0 5 1 * - At 12:00 AM on day 5 of the month, only in January.
+   5 * 1 0 * - Invalid expression.
+   * * 5 1 0 - Every minute on Sunday or on day 5 of the month, only in January.
+
+3. File hw2_gcs_bq_etl.py attached additionally.
+   Commands:
+	python hw2_gcs_bq_etl.py
+	prefect deployment build hw2_gcs_bq_etl.py:etl_parent_flow -n "GCS_2_BQ".
+	prefect deployment apply etl_parent_flow-deployment_hw.yaml
+
+4. from prefect.filesystems import GitHub
+
+	github_block = GitHub.load("gitflow")
+
+5. 
+
